@@ -18,7 +18,7 @@
   * [12、 HashMap和HashTable的区别](#12--hashmap-hashtable---)
   * [13、 Collection包结构，与Collections的区别](#13--collection-----collections---)
   * [14、 Java的四种引用，强弱软虚](#14--java----------)
-  * [15、 泛型常用特点 （待补充）](#15--------------)
+  * [15、 泛型常用特点 ](#15--------------)
   * [16、Java创建对象有几种方式？](#16-java----------)
   * [17、有没有可能两个不相等的对象有相同的hashcode](#17------------------hashcode)
   * [18、深拷贝和浅拷贝的区别是什么?](#18---------------)
@@ -30,10 +30,10 @@
   * [24、 Excption与Error包结构](#24--excption-error---)
   * [25、OOM你遇到过哪些情况，SOF你遇到过哪些情况](#25-oom---------sof--------)
   * [26、 简述线程、程序、进程的基本概念。以及他们之间关系是什么?](#26------------------------------)
-  * [27、线程有哪些基本状态?（补充）](#27---------------)
+  * [27、线程有哪些基本状态?](#27---------------)
   * [28、Java 序列化中如果有些字段不想进行序列化，怎么办？](#28-java-----------------------)
   * [29、Java 中 IO 流](#29-java---io--)
-  * [30、 Java IO与 NIO的区别（补充）](#30--java-io--nio-------)
+  * [30、 Java IO与 NIO的区别](#30--java-io--nio-------)
   * [31、java反射的作用于原理](#31-java--------)
   * [32、说说List,Set,Map三者的区别？](#32---list-set-map------)
 - [JVM篇](#jvm-)
@@ -703,7 +703,7 @@ Collections是集合类的一个帮助类， 它包含有各种有关集合操�
 
 
 
-### 15、 泛型常用特点 （待补充）
+### 15、 泛型常用特点 
 
 泛型是Java SE 1.5之后的特性， 《Java 核心技术》中对泛型的定义是： 
 
@@ -960,11 +960,23 @@ StackOverflowError 的定义：当应用程序递归太深而发生堆栈溢出�
 
 
 
-### 27、线程有哪些基本状态?（补充）
+### 27、线程有哪些基本状态?
 
-Java 线程在运行的生命周期中的指定时刻只可能处于下面 6 种不同状态的其中一个状态（图源《Java 并发编程艺术》4.1.4 节）。
+ ava 线程在运行的生命周期中的指定时刻只可能处于下面6种不同状态的其中一个状态（图源《Java 并发编程艺术》4.1.4节）。
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190618162826310.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zOTk0MDIwNg==,size_16,color_FFFFFF,t_70)
+线程在生命周期中并不是固定处于某一个状态而是随着代码的执行在不同状态之间切换。Java 线程状态变迁如下图所示（图源《Java 并发编程艺术》4.1.4节）： 
+
+ ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190618162853995.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zOTk0MDIwNg==,size_16,color_FFFFFF,t_70) 
+
+ 操作系统隐藏 Java虚拟机（JVM）中的 RUNNABLE 和 RUNNING 状态，它只能看到 RUNNABLE 状态（图源：HowToDoInJava：[Java Thread Life Cycle and Thread States](https://howtodoinjava.com/java/multi-threading/java-thread-life-cycle-and-thread-states/)），所以 Java 系统一般将这两个状态统称为 RUNNABLE（运行中） 状态 。 
+
+> 操作系统隐藏 Java虚拟机（JVM）中的 RUNNABLE 和 RUNNING 状态，它只能看到 RUNNABLE 状态（图源：HowToDoInJava：[Java Thread Life Cycle and Thread States](https://howtodoinjava.com/java/multi-threading/java-thread-life-cycle-and-thread-states/)），所以 Java 系统一般将这两个状态统称为 RUNNABLE（运行中） 状态 。 
 
 
+
+ ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190618163143146.png) 
+
+ 当线程执行 `wait()`方法之后，线程进入 **WAITING（等待）**状态。进入等待状态的线程需要依靠其他线程的通知才能够返回到运行状态，而 TIME_WAITING(超时等待) 状态相当于在等待状态的基础上增加了超时限制，比如通过 `sleep（long millis）`方法或 `wait（long millis）`方法可以将 Java 线程置于 TIMED WAITING 状态。当超时时间到达后 Java 线程将会返回到 RUNNABLE 状态。当线程调用同步方法时，在没有获取到锁的情况下，线程将会进入到 BLOCKED（阻塞） 状态。线程在执行 Runnable 的`run()`方法之后将会进入到 TERMINATED（终止） 状态。 
 
 
 
@@ -1001,10 +1013,9 @@ Java Io 流共涉及 40 多个类，这些类看上去很杂乱，但实际上�
 
 
 
-### 30、 Java IO与 NIO的区别（补充）
+### 30、 Java IO与 NIO的区别
 
-NIO即New IO，这个库是在JDK1.4中才引入的。NIO和IO有相同的作用和目的，但实现方式不同，NIO主要用到的是块，所以NIO的效率要比IO高很多。在Java API中提供了两套NIO，一套是针对标准输入输出NIO，另一套就是网络编程NIO。 
-
+推荐阅读：https://mp.weixin.qq.com/s/N1ojvByYmary65B6JM1ZWA
 
 
 ### 31、java反射的作用于原理
@@ -2639,6 +2650,16 @@ mysql常用引擎包括：MYISAM、Innodb、Memory、MERGE
 
 
 
+**如何选择引擎？**
+
+如果没有特别的需求，使用默认的`Innodb`即可。
+
+MyISAM：以读写插入为主的应用程序，比如博客系统、新闻门户网站。
+
+Innodb：更新（删除）操作频率也高，或者要保证数据的完整性；并发量高，支持事务和外键。比如OA自动化办公系统。
+
+
+
 ### 4、数据库的事务
 
 **什么是事务？：** 多条sql语句，要么全部成功，要么全部失败。 
@@ -2663,9 +2684,24 @@ mysql常用引擎包括：MYISAM、Innodb、Memory、MERGE
 `mysql`有4种不同的索引：
 
 - 主键索引（PRIMARY）
+
+   数据列不允许重复，不允许为NULL，一个表只能有一个主键。 
+
 - 唯一索引（UNIQUE）
+
+  数据列不允许重复，允许为NULL值，一个表允许多个列创建唯一索引。
+
+  - 可以通过 `ALTER TABLE table_name ADD UNIQUE (column);` 创建唯一索引
+  - 可以通过 `ALTER TABLE table_name ADD UNIQUE (column1,column2);` 创建唯一组合索引
+
 - 普通索引（INDEX）
+
+  - 可以通过`ALTER TABLE table_name ADD INDEX index_name (column);`创建普通索引
+  - 可以通过`ALTER TABLE table_name ADD INDEX index_name(column1, column2, column3);`创建组合索引
+
 - 全文索引（FULLTEXT）
+
+   可以通过`ALTER TABLE table_name ADD FULLTEXT (column);`创建全文索引 
 
  **索引并非是越多越好，创建索引也需要耗费资源，一是增加了数据库的存储空间，二是在插入和删除时要花费较多的时间维护索引** 
 
@@ -2731,7 +2767,7 @@ delete语句是dml,这个操作会放到rollback segement中,事务提交之后�
 
 
 
-### 事务隔离级别有哪些?MySQL的默认隔离级别是?
+### 11、事务隔离级别有哪些?MySQL的默认隔离级别是?
 
 **SQL 标准定义了四个隔离级别：**
 
@@ -2766,7 +2802,7 @@ InnoDB 存储引擎在 **分布式事务** 的情况下一般会用到 **SERIALI
 
 
 
-### 大表如何优化？
+### 12、大表如何优化？
 
 当MySQL单表记录数过大时，数据库的CRUD性能会明显下降，一些常见的优化措施如下：
 
@@ -2810,7 +2846,7 @@ InnoDB 存储引擎在 **分布式事务** 的情况下一般会用到 **SERIALI
 
 
 
-### 5、分库分表之后,id 主键如何处理？
+### 13、分库分表之后,id 主键如何处理？
 
 因为要是分成多个表之后，每个表都是从 1 开始累加，这样是不对的，我们需要一个全局唯一的 id 来支持。
 
@@ -2824,7 +2860,124 @@ InnoDB 存储引擎在 **分布式事务** 的情况下一般会用到 **SERIALI
 
 
 
+### 14、mysql有关权限的表都有哪几个
 
+MySQL服务器通过权限表来控制用户对数据库的访问，权限表存放在mysql数据库里，由mysql_install_db脚本初始化。这些权限表分别user，db，table_priv，columns_priv和host。下面分别介绍一下这些表的结构和内容：
+
+- user权限表：记录允许连接到服务器的用户帐号信息，里面的权限是全局级的。
+
+- db权限表：记录各个帐号在各个数据库上的操作权限。
+
+- table_priv权限表：记录数据表级的操作权限。
+
+- columns_priv权限表：记录数据列级的操作权限。
+
+- host权限表：配合db权限表对给定主机上数据库级操作权限作更细致的控制。这个权限表不受GRANT和REVOKE语句的影响。
+
+### 15、mysql有哪些数据类型
+
+**1、整数类型** ，包括TINYINT、SMALLINT、MEDIUMINT、INT、BIGINT，分别表示1字节、2字节、3字节、4字节、8字节整数。任何整数类型都可以加上UNSIGNED属性，表示数据是无符号的，即非负整数。
+长度：整数类型可以被指定长度，例如：INT(11)表示长度为11的INT类型。长度在大多数场景是没有意义的，它不会限制值的合法范围，只会影响显示字符的个数，而且需要和UNSIGNED ZEROFILL属性配合使用才有意义。
+例子，假定类型设定为INT(5)，属性为UNSIGNED ZEROFILL，如果用户插入的数据为12的话，那么数据库实际存储数据为00012。
+
+**2、实数类型**，包括FLOAT、DOUBLE、DECIMAL。
+DECIMAL可以用于存储比BIGINT还大的整型，能存储精确的小数。
+而FLOAT和DOUBLE是有取值范围的，并支持使用标准的浮点进行近似计算。
+计算时FLOAT和DOUBLE相比DECIMAL效率更高一些，DECIMAL你可以理解成是用字符串进行处理。
+
+**3、字符串类型**，包括VARCHAR、CHAR、TEXT、BLOB
+VARCHAR用于存储可变长字符串，它比定长类型更节省空间。
+VARCHAR使用额外1或2个字节存储字符串长度。列长度小于255字节时，使用1字节表示，否则使用2字节表示。
+VARCHAR存储的内容超出设置的长度时，内容会被截断。
+CHAR是定长的，根据定义的字符串长度分配足够的空间。
+CHAR会根据需要使用空格进行填充方便比较。
+CHAR适合存储很短的字符串，或者所有值都接近同一个长度。
+CHAR存储的内容超出设置的长度时，内容同样会被截断。
+
+**使用策略：**
+对于经常变更的数据来说，CHAR比VARCHAR更好，因为CHAR不容易产生碎片。
+对于非常短的列，CHAR比VARCHAR在存储空间上更有效率。
+使用时要注意只分配需要的空间，更长的列排序时会消耗更多内存。
+尽量避免使用TEXT/BLOB类型，查询时会使用临时表，导致严重的性能开销。
+
+**4、枚举类型（ENUM）**，把不重复的数据存储为一个预定义的集合。
+有时可以使用ENUM代替常用的字符串类型。
+ENUM存储非常紧凑，会把列表值压缩到一个或两个字节。
+ENUM在内部存储时，其实存的是整数。
+尽量避免使用数字作为ENUM枚举的常量，因为容易混乱。
+排序是按照内部存储的整数
+
+**5、日期和时间类型**，尽量使用timestamp，空间效率高于datetime，
+用整数保存时间戳通常不方便处理。
+如果需要存储微妙，可以使用bigint存储。
+看到这里，这道真题是不是就比较容易回答了。
+
+
+
+### 16、创建索引的三种方式，删除索引
+
+第一种方式：在执行CREATE TABLE时创建索引
+
+```sql
+CREATE TABLE user_index2 (
+	id INT auto_increment PRIMARY KEY,
+	first_name VARCHAR (16),
+	last_name VARCHAR (16),
+	id_card VARCHAR (18),
+	information text,
+	KEY name (first_name, last_name),
+	FULLTEXT KEY (information),
+	UNIQUE KEY (id_card)
+);
+
+```
+
+ 第二种方式：使用ALTER TABLE命令去增加索引 
+
+```sql
+ALTER TABLE table_name ADD INDEX index_name (column_list);
+```
+
+ALTER TABLE用来创建普通索引、UNIQUE索引或PRIMARY KEY索引。
+
+其中table_name是要增加索引的表名，column_list指出对哪些列进行索引，多列时各列之间用逗号分隔。
+
+索引名index_name可自己命名，缺省时，MySQL将根据第一个索引列赋一个名称。另外，ALTER TABLE允许在单个语句中更改多个表，因此可以在同时创建多个索引。
+
+第三种方式：使用CREATE INDEX命令创建
+
+```sql
+CREATE INDEX index_name ON table_name (column_list);
+```
+
+CREATE INDEX可对表增加普通索引或UNIQUE索引。（但是，不能创建PRIMARY KEY索引）
+
+删除索引
+
+根据索引名删除普通索引、唯一索引、全文索引：`alter table 表名 drop KEY 索引名`
+
+```sql
+alter table user_index drop KEY name;
+alter table user_index drop KEY id_card;
+alter table user_index drop KEY information;
+
+```
+
+ 删除主键索引：`alter table 表名 drop primary key`（因为主键只有一个）。这里值得注意的是，如果主键自增长，那么不能直接执行此操作（自增长依赖于主键索引）： 
+
+ ![img](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91c2VyLWdvbGQtY2RuLnhpdHUuaW8vMjAxOS8yLzE5LzE2OTA0NTk2YjIxZTIwOWM?x-oss-process=image/format,png)
+
+ 需要取消自增长再行删除：  
+
+```sql
+alter table user_index
+-- 重新定义字段
+MODIFY id int,
+drop PRIMARY KEY
+
+```
+
+ 但通常不会删除主键，因为设计主键一定与业务逻辑无关。 
 
 ## Redis篇
 
@@ -3208,9 +3361,9 @@ Nginx 是一个高性能的 Web 服务器，能够同时处理大量的并发请
 
 ```
 Server{
-	listen 80;
-	server_name "";
-	return 444;
+    listen 80;
+    server_name "";
+    return 444;
 }
 ```
 
@@ -3624,29 +3777,29 @@ import java.util.Arrays;
 
 //打乱数组
 public class Demo1 {
-	
-	//随机打乱
-	public static int[] srand(int[] a) {
-		int[] b = new int[a.length];
-		
-		for(int i = 0; i < a.length;i++) {
-			//随机获取下标
-			int tmp = (int)(Math.random()*(a.length - i)); //随机数:[ 0 ，a.length - i )  
-			b[i] = a[tmp];
-			
-			//将此时a[tmp]的下标移动到靠后的位置
-			int change = a[a.length - i - 1];
-			a[a.length - i - 1] = a[tmp];
-			a[tmp] = change;
-		}
-		
-		return b;
-	}
-	
-	public static void main(String[] args) {
-		int[] a = {1,2,3,4,5,6,7,8,9};
-		System.out.println(Arrays.toString(srand(a)));
-	}
+    
+    //随机打乱
+    public static int[] srand(int[] a) {
+        int[] b = new int[a.length];
+        
+        for(int i = 0; i < a.length;i++) {
+            //随机获取下标
+            int tmp = (int)(Math.random()*(a.length - i)); //随机数:[ 0 ，a.length - i )  
+            b[i] = a[tmp];
+            
+            //将此时a[tmp]的下标移动到靠后的位置
+            int change = a[a.length - i - 1];
+            a[a.length - i - 1] = a[tmp];
+            a[tmp] = change;
+        }
+        
+        return b;
+    }
+    
+    public static void main(String[] args) {
+        int[] a = {1,2,3,4,5,6,7,8,9};
+        System.out.println(Arrays.toString(srand(a)));
+    }
 }
 
 ```
@@ -3660,26 +3813,26 @@ import java.util.Scanner;
 
 //判断整数是不是2的阶次方
 public class Demo2 {
-	
-	public static boolean check(int sum) {
-		boolean flag = true; //判断标志
-		while(sum > 1) {
-			if (sum % 2 == 0) {
-				sum = sum/2;
-			} else {
-				flag = false;
-				break;
-			}
-		}
-		return flag;
-	}
-	
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("请输入一个整数:");
-		int sum = scanner.nextInt();
-		System.out.println(sum + " 是不是2的阶次方：" + check(sum));
-	}
+    
+    public static boolean check(int sum) {
+        boolean flag = true; //判断标志
+        while(sum > 1) {
+            if (sum % 2 == 0) {
+                sum = sum/2;
+            } else {
+                flag = false;
+                break;
+            }
+        }
+        return flag;
+    }
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("请输入一个整数:");
+        int sum = scanner.nextInt();
+        System.out.println(sum + " 是不是2的阶次方：" + check(sum));
+    }
 }
 
 ```
@@ -3693,54 +3846,54 @@ import java.util.Scanner;
 
 //算出星期几
 public class Demo4 {
-	public static String[] week = {"星期日","星期一","星期二","星期三","星期四","星期五","星期六"};
-	public static int i = 0;
-	public static int[] monthday1 = {0,31,28,31,30,31,30,31,31,30,31,30,31};
-	public static int[] monthday2 = {0,31,29,31,30,31,30,31,31,30,31,30,31};
-	
-	//查看距离当前天数的差值
-	public static String distance(int year,int month,int day,int newMonth,int newDay) {
-		int sum = 0; //设定初始距离天数
-		if (month + newMonth >= 12) {
-			if (((year + 1) % 4 == 0 && (year + 1) % 100 != 0)||(year + 1) % 400 == 0) {
-				sum += 366 + newDay;
-				for(int i = 0;i < newMonth - 12;i++) {
-					sum += monthday1[month + i];
-				}
-			} else {
-				sum += 365 + newDay;
-				for(int i = 0;i < newMonth - 12;i++) {
-					sum += monthday1[month + i];
-				}
-			}
-		} else {
-			for(int i = 0;i < newMonth;i++) {
-				sum += monthday1[month + i];
-			}
-			sum += newDay;
-		}
-		return week[sum%7];
-	}
+    public static String[] week = {"星期日","星期一","星期二","星期三","星期四","星期五","星期六"};
+    public static int i = 0;
+    public static int[] monthday1 = {0,31,28,31,30,31,30,31,31,30,31,30,31};
+    public static int[] monthday2 = {0,31,29,31,30,31,30,31,31,30,31,30,31};
+    
+    //查看距离当前天数的差值
+    public static String distance(int year,int month,int day,int newMonth,int newDay) {
+        int sum = 0; //设定初始距离天数
+        if (month + newMonth >= 12) {
+            if (((year + 1) % 4 == 0 && (year + 1) % 100 != 0)||(year + 1) % 400 == 0) {
+                sum += 366 + newDay;
+                for(int i = 0;i < newMonth - 12;i++) {
+                    sum += monthday1[month + i];
+                }
+            } else {
+                sum += 365 + newDay;
+                for(int i = 0;i < newMonth - 12;i++) {
+                    sum += monthday1[month + i];
+                }
+            }
+        } else {
+            for(int i = 0;i < newMonth;i++) {
+                sum += monthday1[month + i];
+            }
+            sum += newDay;
+        }
+        return week[sum%7];
+    }
 
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("请输入当前年份");
-		int year = scanner.nextInt();
-		System.out.println("请输入当前月份");
-		int month = scanner.nextInt();
-		System.out.println("请输入当前天数");
-		int day = scanner.nextInt();
-		System.out.println("请输入当前是星期几：以数字表示，如：星期天 为 0");
-		int index = scanner.nextInt();
-		System.out.println("今天是：" + year + "-" + month + "-" + day + "  " + week[index]);
-		
-		System.err.println("请输入相隔月份");
-		int newMonth = scanner.nextInt();
-		System.out.println("请输入剩余天数");
-		int newDay = scanner.nextInt();
-		
-		System.out.println("经过" + newMonth + "月" + newDay + "天后，是" + distance(year,month,day,newMonth,newDay));
-	}
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("请输入当前年份");
+        int year = scanner.nextInt();
+        System.out.println("请输入当前月份");
+        int month = scanner.nextInt();
+        System.out.println("请输入当前天数");
+        int day = scanner.nextInt();
+        System.out.println("请输入当前是星期几：以数字表示，如：星期天 为 0");
+        int index = scanner.nextInt();
+        System.out.println("今天是：" + year + "-" + month + "-" + day + "  " + week[index]);
+        
+        System.err.println("请输入相隔月份");
+        int newMonth = scanner.nextInt();
+        System.out.println("请输入剩余天数");
+        int newDay = scanner.nextInt();
+        
+        System.out.println("经过" + newMonth + "月" + newDay + "天后，是" + distance(year,month,day,newMonth,newDay));
+    }
 }
 
 ```
@@ -3752,66 +3905,66 @@ public class Demo4 {
 ```java
 //面向对象思想实现篮子物品交换
 public class Demo5 {
-	public static void main(String[] args) {
-		//创建篮子
-		Basket A = new Basket("A");
-		Basket B = new Basket("B");
-		
-		//装载物品
-		A.load("鸡蛋");
-		B.load("苹果");
-		
-		//交换物品
-		A.change(B);
-		
-		A.show();
-		B.show();
-	}
+    public static void main(String[] args) {
+        //创建篮子
+        Basket A = new Basket("A");
+        Basket B = new Basket("B");
+        
+        //装载物品
+        A.load("鸡蛋");
+        B.load("苹果");
+        
+        //交换物品
+        A.change(B);
+        
+        A.show();
+        B.show();
+    }
 }
 
 class Basket{
-	public String name; //篮子名称
-	private Goods goods; //篮子中所装物品
-	
-	public Basket(String name) {
-		// TODO Auto-generated constructor stub
-		this.name = name;
-		System.out.println(name + "篮子被创建");
-	}
-	
-	//装物品函数
-	public void load(String name) {
-		goods = new Goods(name);
-		System.out.println(this.name + "装载了" + name + "物品");
-	}
-	
-	public void change(Basket B) {
-		System.out.println(this.name + " 和 " + B.name + "中的物品发生了交换");
-		String tmp = this.goods.getName();
-		this.goods.setName(B.goods.getName());
-		B.goods.setName(tmp);
-	}
-	
-	public void show() {
-		System.out.println(this.name + "中有" + goods.getName() + "物品");
-	}
+    public String name; //篮子名称
+    private Goods goods; //篮子中所装物品
+    
+    public Basket(String name) {
+        // TODO Auto-generated constructor stub
+        this.name = name;
+        System.out.println(name + "篮子被创建");
+    }
+    
+    //装物品函数
+    public void load(String name) {
+        goods = new Goods(name);
+        System.out.println(this.name + "装载了" + name + "物品");
+    }
+    
+    public void change(Basket B) {
+        System.out.println(this.name + " 和 " + B.name + "中的物品发生了交换");
+        String tmp = this.goods.getName();
+        this.goods.setName(B.goods.getName());
+        B.goods.setName(tmp);
+    }
+    
+    public void show() {
+        System.out.println(this.name + "中有" + goods.getName() + "物品");
+    }
 }
 
 class Goods{
- 	private String name; //物品名称
- 	
- 	public String getName() {
-		return name;
-	}
+    private String name; //物品名称
+    
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public Goods(String name) {
-		// TODO Auto-generated constructor stub
- 		this.name = name;
-	}
+    public Goods(String name) {
+        // TODO Auto-generated constructor stub
+        this.name = name;
+    }
 }
 
 ```
