@@ -1,6 +1,6 @@
 关注公众号『**Java专栏**』,发送『面试』 获取该项目完整PDF
 
-![img](https://gitee.com/gsjqwyl/images_repo/raw/master/Java专栏.jpg) 
+![公众号：java专栏](qr_code.jpg)
 
 ---
 - [基础篇](#---)
