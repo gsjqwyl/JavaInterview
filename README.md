@@ -871,7 +871,7 @@ ArrayStoreException（数据存储异常，操作数组是类型不一致）
 
 BufferOverflowException 
 
-
+  
 
 **2、被检查异常**
 
@@ -962,7 +962,7 @@ StackOverflowError 的定义：当应用程序递归太深而发生堆栈溢出�
 
 ### 27、线程有哪些基本状态?
 
- ava 线程在运行的生命周期中的指定时刻只可能处于下面6种不同状态的其中一个状态（图源《Java 并发编程艺术》4.1.4节）。
+ Java 线程在运行的生命周期中的指定时刻只可能处于下面6种不同状态的其中一个状态（图源《Java 并发编程艺术》4.1.4节）。
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190618162826310.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zOTk0MDIwNg==,size_16,color_FFFFFF,t_70)
 线程在生命周期中并不是固定处于某一个状态而是随着代码的执行在不同状态之间切换。Java 线程状态变迁如下图所示（图源《Java 并发编程艺术》4.1.4节）： 
 
@@ -2444,7 +2444,21 @@ Mybatis仅支持association关联对象和collection关联集合对象的延迟�
 
 
 
-### 1、为什么要用SpringBoot
+### 1、什么是SpringBoot？为什么要用SpringBoot
+
+用来简化spring应用的初始搭建以及开发过程 使用特定的方式来进行配置（properties或yml文件）
+
+创建独立的spring引用程序 main方法运行 
+
+嵌入的Tomcat 无需部署war文件 
+
+简化maven配置 
+
+自动配置spring添加对应功能starter自动化配置 
+
+**spring boot来简化spring应用开发，约定大于配置，去繁从简，just run就能创建一个独立的，产品级别的应用**
+
+
 
 Spring Boot 优点非常多，如：
 
@@ -2610,6 +2624,92 @@ bootstrap 配置文件有以下几个应用场景。
  对于集成 Spring Boot 和 ActiveMQ，我们使用
 spring-boot-starter-activemq
 依赖关系。 它只需要很少的配置，并且不需要样板代码。 
+
+
+
+### 15、如何重新加载Spring Boot上的更改，而无需重新启动服务器？
+
+这可以使用DEV工具来实现。通过这种依赖关系，您可以节省任何更改，嵌入式tomcat将重新启动。 
+
+Spring Boot有一个开发工具（DevTools）模块，它有助于提高开发人员的生产力。Java开发人员面临的一个主要挑战是将文件更改自动部署到服务器并自动重启服务器。 
+
+开发人员可以重新加载Spring Boot上的更改，而无需重新启动服务器。这将消除每次手动部署更改的需要。Spring Boot在发布它的第一个版本时没有这个功能。 
+
+这是开发人员最需要的功能。DevTools模块完全满足开发人员的需求。该模块将在生产环境中被禁用。它还提供H2数据库控制台以更好地测试应用程序。 
+
+org.springframework.boot 
+
+spring-boot-devtools 
+
+true 
+
+
+
+### 16、 Spring Boot、Spring MVC 和 Spring 有什么区别？
+
+
+
+1、Spring
+
+Spring最重要的特征是依赖注入。所有 SpringModules 不是依赖注入就是 IOC 控制反转。
+
+当我们恰当的使用 DI 或者是 IOC 的时候，我们可以开发松耦合应用。松耦合应用的单元测试可以很容易的进行。
+
+2、Spring MVC
+
+Spring MVC 提供了一种分离式的方法来开发 Web 应用。通过运用像 DispatcherServelet，MoudlAndView 和 ViewResolver 等一些简单的概念，开发 Web 应用将会变的非常简单。
+
+3、SpringBoot
+
+Spring 和 SpringMVC 的问题在于需要配置大量的参数。
+
+ ![img](https://mmbiz.qpic.cn/mmbiz_png/KLTiaLuJImELSYlz43K7eJXnVZcbNPt3h4P9rx8JicF7vYPt1sP52ibXeUqd5sibRSzDaMGM75r0M4ibOW0yIoSrRxA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1) 
+
+ Spring Boot 通过一个自动配置和启动的项来目解决这个问题。为了更快的构建产品就绪应用程序，Spring Boot 提供了一些非功能性特征。 
+
+
+
+### 17、 **能否举一个例子来解释更多 Staters 的内容？** 
+
+让我们来思考一个 Stater 的例子 -Spring Boot Stater Web。
+
+如果你想开发一个 web 应用程序或者是公开 REST 服务的应用程序。Spring Boot Start Web 是首选。让我们使用 Spring Initializr 创建一个 Spring Boot Start Web 的快速项目。
+
+Spring Boot Start Web 的依赖项
+
+ ![img](https://mmbiz.qpic.cn/mmbiz_png/KLTiaLuJImELSYlz43K7eJXnVZcbNPt3hZtKfFL4LrGXbHEgRiafCzqq1E4s3x0iaj26fziavAkvLkLwKU5CLsM4icQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1) 
+
+ 下面的截图是添加进我们应用程序的不同的依赖项 
+
+ ![img](https://mmbiz.qpic.cn/mmbiz_png/KLTiaLuJImELSYlz43K7eJXnVZcbNPt3hNKv6hhyicgxUSGYmxeRrPZX1rbvzomiaWNIZOHxEF3ibp6Kqm3eAwv8DQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1) 
+
+依赖项可以被分为：
+
+- Spring - core，beans，context，aop
+- Web MVC - （Spring MVC）
+- Jackson - for JSON Binding
+- Validation - Hibernate,Validation API
+- Enbedded Servlet Container - Tomcat
+- Logging - logback,slf4j
+
+任何经典的 Web 应用程序都会使用所有这些依赖项。Spring Boot Starter Web 预先打包了这些依赖项。
+
+作为一个开发者，我不需要再担心这些依赖项和它们的兼容版本。
+
+### 18、 **Spring Boot 还提供了其它的哪些 Starter Project Options？** 
+
+Spring Boot 也提供了其它的启动器项目包括，包括用于开发特定类型应用程序的典型依赖项。
+
+- spring-boot-starter-web-services - SOAP Web Services；
+- spring-boot-starter-web - Web 和 RESTful 应用程序；
+- spring-boot-starter-test - 单元测试和集成测试；
+- spring-boot-starter-jdbc - 传统的 JDBC；
+- spring-boot-starter-hateoas - 为服务添加 HATEOAS 功能；
+- spring-boot-starter-security - 使用 SpringSecurity 进行身份验证和授权；
+- spring-boot-starter-data-jpa - 带有 Hibeernate 的 Spring Data JPA；
+- spring-boot-starter-data-rest - 使用 Spring Data REST 公布简单的 REST 服务；
+
+
 
 ## MySQL篇
 
